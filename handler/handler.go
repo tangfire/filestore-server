@@ -32,7 +32,10 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 
 		fileMeta := meta.FileMeta{
 			FileName: head.Filename,
-			Location: "/tmp/" + head.Filename,
+			// linux
+			//Location: "/tmp/" + head.Filename,
+			// windows
+			Location: "./tmp/" + head.Filename,
 			UploadAt: time.Now().Format("2006-01-02 15:04:05"),
 		}
 
@@ -60,7 +63,9 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 		//在流式处理中: 在处理大文件或流式数据时，可能会需要多次读取相同的文件，使用 Seek(0, 0) 可以方便地重置指针。
 		newFile.Seek(0, 0)
 		fileMeta.FileSha1 = util.FileSha1(newFile)
-		meta.UpdateFileMeta(fileMeta)
+		//meta.UpdateFileMeta(fileMeta)
+
+		_ = meta.UpdateFileMetaDB(fileMeta)
 
 		http.Redirect(w, r, "/file/upload/suc", http.StatusFound)
 

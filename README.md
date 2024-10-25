@@ -1,3 +1,26 @@
+# 注意：
+因为我本地只有wsl2，没有真正的linux系统，所以我这个项目是在windows环境下运行的，并且使用了go mod管理(你自己选择要不要使用，反正我用了，因为好像Go版本高了以后，就推荐你用go mod管理了)
+
+因此我在项目里面创建了一个tmp文件夹，然后将handler.go这个文件里面的代码改为：
+
+```go
+fileMeta := meta.FileMeta{
+			FileName: head.Filename,
+			// linux
+			//Location: "/tmp/" + head.Filename,
+			// windows
+			Location: "./tmp/" + head.Filename,
+			UploadAt: time.Now().Format("2006-01-02 15:04:05"),
+		}
+
+```
+
+如果你要在linux系统中运行，只要改为用linux的这行代码:
+
+`Location: "/tmp/" + head.Filename,`
+
+
+
 # 在docker中配置mysql主从数据同步
 
 ## 主服务器
@@ -244,6 +267,22 @@ reset slave;
 reset master;
 
 ```
+
+
+# 创建数据库
+
+```sql
+create database fileserver default character set utf8;
+
+use fileserver
+
+```
+
+然后执行doc/table.sql中的sql,创建tbl_file表
+
+
+
+
 
 
 

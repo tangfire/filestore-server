@@ -1,0 +1,209 @@
+labels.min() = 0 labels.max() = 9
+输出形状:torch.Size([128, 16]) 标签形状:torch.Size([128])
+labels.min() = 0 labels.max() = 9
+输出形状:torch.Size([128, 16]) 标签形状:torch.Size([128])
+labels.min() = 0 labels.max() = 9
+输出形状:torch.Size([128, 16]) 标签形状:torch.Size([128])
+Start model initialization: 
+Model  CNN_128__256
+start full stack training ...
+Starting epoch 1/25
+labels.min() = 0 labels.max() = 82
+输出形状:torch.Size([18, 16]) 标签形状:torch.Size([18])
+C:\cb\pytorch_1000000000000\work\aten\src\ATen\native\cuda\Loss.cu:250: block: [0,0,0], thread: [0,0,0] Assertion `t >= 0 && t < n_classes` failed.
+C:\cb\pytorch_1000000000000\work\aten\src\ATen\native\cuda\Loss.cu:250: block: [0,0,0], thread: [1,0,0] Assertion `t >= 0 && t < n_classes` failed.
+C:\cb\pytorch_1000000000000\work\aten\src\ATen\native\cuda\Loss.cu:250: block: [0,0,0], thread: [2,0,0] Assertion `t >= 0 && t < n_classes` failed.
+C:\cb\pytorch_1000000000000\work\aten\src\ATen\native\cuda\Loss.cu:250: block: [0,0,0], thread: [6,0,0] Assertion `t >= 0 && t < n_classes` failed.
+C:\cb\pytorch_1000000000000\work\aten\src\ATen\native\cuda\Loss.cu:250: block: [0,0,0], thread: [7,0,0] Assertion `t >= 0 && t < n_classes` failed.
+C:\cb\pytorch_1000000000000\work\aten\src\ATen\native\cuda\Loss.cu:250: block: [0,0,0], thread: [8,0,0] Assertion `t >= 0 && t < n_classes` failed.
+C:\cb\pytorch_1000000000000\work\aten\src\ATen\native\cuda\Loss.cu:250: block: [0,0,0], thread: [9,0,0] Assertion `t >= 0 && t < n_classes` failed.
+C:\cb\pytorch_1000000000000\work\aten\src\ATen\native\cuda\Loss.cu:250: block: [0,0,0], thread: [11,0,0] Assertion `t >= 0 && t < n_classes` failed.
+C:\cb\pytorch_1000000000000\work\aten\src\ATen\native\cuda\Loss.cu:250: block: [0,0,0], thread: [13,0,0] Assertion `t >= 0 && t < n_classes` failed.
+C:\cb\pytorch_1000000000000\work\aten\src\ATen\native\cuda\Loss.cu:250: block: [0,0,0], thread: [14,0,0] Assertion `t >= 0 && t < n_classes` failed.
+C:\cb\pytorch_1000000000000\work\aten\src\ATen\native\cuda\Loss.cu:250: block: [0,0,0], thread: [15,0,0] Assertion `t >= 0 && t < n_classes` failed.
+C:\cb\pytorch_1000000000000\work\aten\src\ATen\native\cuda\Loss.cu:250: block: [0,0,0], thread: [16,0,0] Assertion `t >= 0 && t < n_classes` failed.
+Traceback (most recent call last):
+  File "D:\federatedlearning\FedMD-main\IID.py", line 164, in <module>
+  File "D:\federatedlearning\FedMD-main\IID.py", line 144, in main
+    # Creation of the FedMD algorithm
+  File "D:\federatedlearning\FedMD-main\FedMD.py", line 85, in __init__
+    accuracy = train(
+  File "D:\federatedlearning\FedMD-main\training.py", line 56, in train
+    loss = loss_fn(outputs, labels)
+  File "D:\anaconda\envs\py39\lib\site-packages\torch\nn\modules\module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "D:\anaconda\envs\py39\lib\site-packages\torch\nn\modules\module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "D:\anaconda\envs\py39\lib\site-packages\torch\nn\modules\loss.py", line 1185, in forward
+    return F.cross_entropy(input, target, weight=self.weight,
+  File "D:\anaconda\envs\py39\lib\site-packages\torch\nn\functional.py", line 3086, in cross_entropy
+    return torch._C._nn.cross_entropy_loss(input, target, weight, _Reduction.get_enum(reduction), ignore_index, label_smoothing)
+RuntimeError: CUDA error: device-side assert triggered
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+Exception in thread IntMsgThr:
+Traceback (most recent call last):
+  File "D:\anaconda\envs\py39\lib\threading.py", line 980, in _bootstrap_inner
+    self.run()
+  File "D:\anaconda\envs\py39\lib\threading.py", line 917, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\anaconda\envs\py39\lib\site-packages\wandb\sdk\wandb_run.py", line 325, in check_internal_messages
+    self._loop_check_status(
+  File "D:\anaconda\envs\py39\lib\site-packages\wandb\sdk\wandb_run.py", line 235, in _loop_check_status
+    local_handle = request()
+  File "D:\anaconda\envs\py39\lib\site-packages\wandb\sdk\interface\interface.py", line 912, in deliver_internal_messages
+    return self._deliver_internal_messages(internal_message)
+  File "D:\anaconda\envs\py39\lib\site-packages\wandb\sdk\interface\interface_shared.py", line 503, in _deliver_internal_messages
+    return self._deliver_record(record)
+  File "D:\anaconda\envs\py39\lib\site-packages\wandb\sdk\interface\interface_shared.py", line 452, in _deliver_record
+    handle = mailbox._deliver_record(record, interface=self)
+  File "D:\anaconda\envs\py39\lib\site-packages\wandb\sdk\lib\mailbox.py", line 455, in _deliver_record
+    interface._publish(record)
+  File "D:\anaconda\envs\py39\lib\site-packages\wandb\sdk\interface\interface_sock.py", line 51, in _publish
+    self._sock_client.send_record_publish(record)
+  File "D:\anaconda\envs\py39\lib\site-packages\wandb\sdk\lib\sock_client.py", line 225, in send_record_publish
+    self.send_server_request(server_req)
+  File "D:\anaconda\envs\py39\lib\site-packages\wandb\sdk\lib\sock_client.py", line 157, in send_server_request
+    self._send_message(msg)
+  File "D:\anaconda\envs\py39\lib\site-packages\wandb\sdk\lib\sock_client.py", line 154, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "D:\anaconda\envs\py39\lib\site-packages\wandb\sdk\lib\sock_client.py", line 132, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+ConnectionAbortedError: [WinError 10053] 你的主机中的软件中止了一个已建立的连接。
+wandb: 🚀 View run helpful-bird-5 at: https://wandb.ai/52628216-/fl_md/runs/1a7y8eb8
+wandb: Find logs at: wandb\run-20241008_190118-1a7y8eb8\logs
+
+
+
+==========================================================================================================================
+
+
+
+Starting epoch 50/50
+UB - Model CNN_128_192_256
+Starting epoch 1/50
+Step 0, Loss 15.840545654296875
+Starting epoch 2/50
+Starting epoch 3/50
+Starting epoch 4/50
+Starting epoch 5/50
+Starting epoch 6/50
+Starting epoch 7/50
+Starting epoch 8/50
+Starting epoch 9/50
+Starting epoch 10/50
+Starting epoch 11/50
+Starting epoch 12/50
+Starting epoch 13/50
+Starting epoch 14/50
+Starting epoch 15/50
+Starting epoch 16/50
+Starting epoch 17/50
+Starting epoch 18/50
+Starting epoch 19/50
+Starting epoch 20/50
+Starting epoch 21/50
+Starting epoch 22/50
+Starting epoch 23/50
+Starting epoch 24/50
+Starting epoch 25/50
+Starting epoch 26/50
+Starting epoch 27/50
+Starting epoch 28/50
+Starting epoch 29/50
+Starting epoch 30/50
+Starting epoch 31/50
+Starting epoch 32/50
+Starting epoch 33/50
+Starting epoch 34/50
+Starting epoch 35/50
+Starting epoch 36/50
+Starting epoch 37/50
+Starting epoch 38/50
+Starting epoch 39/50
+Starting epoch 40/50
+Starting epoch 41/50
+Starting epoch 42/50
+Starting epoch 43/50
+Traceback (most recent call last):
+  File "D:\federatedlearning\FedMD-main\IID.py", line 171, in <module>
+    main()
+  File "D:\federatedlearning\FedMD-main\IID.py", line 151, in main
+    fedmd = FedMD(agents=agents,
+  File "D:\federatedlearning\FedMD-main\FedMD.py", line 137, in __init__
+    accuracy = train(
+  File "D:\federatedlearning\FedMD-main\training.py", line 89, in train
+    test_accuracy = test(net, test_dataset, batch_size=batch_size)
+  File "D:\federatedlearning\FedMD-main\training.py", line 104, in test
+    images = images.to(DEVICE)
+AttributeError: 'list' object has no attribute 'to'
+Exception in thread IntMsgThr:
+Traceback (most recent call last):
+  File "D:\anaconda\envs\py39\lib\threading.py", line 980, in _bootstrap_inner
+    self.run()
+  File "D:\anaconda\envs\py39\lib\threading.py", line 917, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\anaconda\envs\py39\lib\site-packages\wandb\sdk\wandb_run.py", line 325, in check_internal_messages
+    self._loop_check_status(
+  File "D:\anaconda\envs\py39\lib\site-packages\wandb\sdk\wandb_run.py", line 235, in _loop_check_status
+    local_handle = request()
+  File "D:\anaconda\envs\py39\lib\site-packages\wandb\sdk\interface\interface.py", line 912, in deliver_internal_messages
+    return self._deliver_internal_messages(internal_message)
+  File "D:\anaconda\envs\py39\lib\site-packages\wandb\sdk\interface\interface_shared.py", line 503, in _deliver_internal_messages
+    return self._deliver_record(record)
+  File "D:\anaconda\envs\py39\lib\site-packages\wandb\sdk\interface\interface_shared.py", line 452, in _deliver_record
+    handle = mailbox._deliver_record(record, interface=self)
+  File "D:\anaconda\envs\py39\lib\site-packages\wandb\sdk\lib\mailbox.py", line 455, in _deliver_record
+    interface._publish(record)
+  File "D:\anaconda\envs\py39\lib\site-packages\wandb\sdk\interface\interface_sock.py", line 51, in _publish
+    self._sock_client.send_record_publish(record)
+  File "D:\anaconda\envs\py39\lib\site-packages\wandb\sdk\lib\sock_client.py", line 225, in send_record_publish
+    self.send_server_request(server_req)
+  File "D:\anaconda\envs\py39\lib\site-packages\wandb\sdk\lib\sock_client.py", line 157, in send_server_request
+    self._send_message(msg)
+  File "D:\anaconda\envs\py39\lib\site-packages\wandb\sdk\lib\sock_client.py", line 154, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "D:\anaconda\envs\py39\lib\site-packages\wandb\sdk\lib\sock_client.py", line 132, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+ConnectionAbortedError: [WinError 10053] 你的主机中的软件中止了一个已建立的连接。
+Exception in thread ChkStopThr:
+Traceback (most recent call last):
+  File "D:\anaconda\envs\py39\lib\threading.py", line 980, in _bootstrap_inner
+    self.run()
+  File "D:\anaconda\envs\py39\lib\threading.py", line 917, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\anaconda\envs\py39\lib\site-packages\wandb\sdk\wandb_run.py", line 305, in check_stop_status
+    self._loop_check_status(
+  File "D:\anaconda\envs\py39\lib\site-packages\wandb\sdk\wandb_run.py", line 235, in _loop_check_status
+    local_handle = request()
+  File "D:\anaconda\envs\py39\lib\site-packages\wandb\sdk\interface\interface.py", line 896, in deliver_stop_status
+    return self._deliver_stop_status(status)
+  File "D:\anaconda\envs\py39\lib\site-packages\wandb\sdk\interface\interface_shared.py", line 487, in _deliver_stop_status
+    return self._deliver_record(record)
+  File "D:\anaconda\envs\py39\lib\site-packages\wandb\sdk\interface\interface_shared.py", line 452, in _deliver_record
+    handle = mailbox._deliver_record(record, interface=self)
+  File "D:\anaconda\envs\py39\lib\site-packages\wandb\sdk\lib\mailbox.py", line 455, in _deliver_record
+    interface._publish(record)
+  File "D:\anaconda\envs\py39\lib\site-packages\wandb\sdk\interface\interface_sock.py", line 51, in _publish
+    self._sock_client.send_record_publish(record)
+  File "D:\anaconda\envs\py39\lib\site-packages\wandb\sdk\lib\sock_client.py", line 225, in send_record_publish
+    self.send_server_request(server_req)
+  File "D:\anaconda\envs\py39\lib\site-packages\wandb\sdk\lib\sock_client.py", line 157, in send_server_request
+    self._send_message(msg)
+  File "D:\anaconda\envs\py39\lib\site-packages\wandb\sdk\lib\sock_client.py", line 154, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "D:\anaconda\envs\py39\lib\site-packages\wandb\sdk\lib\sock_client.py", line 132, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+ConnectionAbortedError: [WinError 10053] 你的主机中的软件中止了一个已建立的连接。
+wandb: 🚀 View run pretty-lake-14 at: https://wandb.ai/52628216-/fl_md/runs/0r5cl7hu
+wandb: Find logs at: wandb\run-20241009_141250-0r5cl7hu\logs
+Error in atexit._run_exitfuncs:
+Traceback (most recent call last):
+  File "D:\anaconda\envs\py39\lib\subprocess.py", line 1189, in wait
+    return self._wait(timeout=timeout)
+  File "D:\anaconda\envs\py39\lib\subprocess.py", line 1470, in _wait
+    result = _winapi.WaitForSingleObject(self._handle,
+KeyboardInterrupt
+
+
+
