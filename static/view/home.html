@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        header {
+            background: #007bff;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .user-info {
+            margin-top: 20px;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Welcome to the Home Page</h1>
+</header>
+
+<div class="container">
+    <h2>User Information</h2>
+    <button id="loadUserInfo">Load User Info</button>
+    <div class="user-info" id="userInfo"></div>
+</div>
+
+<script>
+    document.getElementById('loadUserInfo').addEventListener('click', function() {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', '/user/info', true);
+
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                const userInfo = JSON.parse(xhr.responseText);
+                document.getElementById('userInfo').innerHTML = `
+                    <p><strong>Username:</strong> ${userInfo.username}</p>
+                    <p><strong>Email:</strong> ${userInfo.email}</p>
+                `;
+            } else {
+                document.getElementById('userInfo').innerHTML = `
+                    <p class="error">Failed to load user info. Status: ${xhr.status}</p>
+                `;
+            }
+        };
+
+        xhr.onerror = function() {
+            document.getElementById('userInfo').innerHTML = `
+                <p class="error">Request error. Please try again later.</p>
+            `;
+        };
+
+        xhr.send();
+    });
+</script>
+
+</body>
+</html>
