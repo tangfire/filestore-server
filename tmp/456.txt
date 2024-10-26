@@ -1,0 +1,37 @@
+FedMD的过程：
+训练模型： 每个客户端首先在公共数据集上训练自己的模型，然后在各自的私有数据集上继续训练(迁移学习)。
+计算分数： 每个客户端计算其在公共数据集上的logits，然后发送给服务器,服务器对这些logits进行聚合，然后客户端下载这个平均的logits，在公共数据集上训练本地模型，使本地模型的这个输出的logits接近平均的logits，损失函数是绝对误差损失，然后在本地私有数据集上进行几轮训练进行一个微调
+
+
+
+
+FedDF:先进行一轮正常的FedAvg,也就是每个客户端先进行本地训练，上传梯度给服务器，服务器进行加权聚合，然后用KL散度作为损失函数，KL散度就是用来衡量两个概率分布之间的差异，让服务器在公共数据集上输出的logits与多个客户端在公共数据集上输出的平均的logits接近，之后进行反向传播，更新服务器的模型
+
+
+docker run -d --name=mysql-server -p 3306:3306 -v mysql-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=8888.216 mysql
+
+db.auth("admin","123456")
+
+
+docker run --name=mongodb --hostname=847fdbbc7b91 --mac-address=02:42:ac:11:00:08 --env=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin --env=GOSU_VERSION=1.12 --env=JSYAML_VERSION=3.13.1 --env=MONGO_PACKAGE=mongodb-org --env=MONGO_REPO=repo.mongodb.org --env=MONGO_MAJOR=5.0 --env=MONGO_VERSION=5.0.5 --volume=/usr/local/mongodb/data:/data/db --volume=/data/configdb --volume=/data/db -p 27017:27017 --restart=always --log-opt max-file=3 --log-opt max-size=1024m --detach=true mongo --auth
+
+
+docker run -dit --name mongo \
+-p 17017:27017 \
+-v /data/mongo/config/mongod.conf:/etc/mongod.conf \
+-v /data/mongo/data:/data/db \
+-v /data/mongo/logs:/var/log/mongodb \
+-e MONGO_INITDB_ROOT_USERNAME=root \
+-e MONGO_INITDB_ROOT_PASSWORD=8888.216 \
+--restart=always  \
+mongo
+
+
+docker exec -it mongo /bin/mongosh
+
+
+# 使用创建容器时的用户名和密码
+db.auth("root","8888.216")
+
+
+mongodb://root:8888.216@localhost:27017/database

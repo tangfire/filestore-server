@@ -20,6 +20,16 @@ fileMeta := meta.FileMeta{
 `Location: "/tmp/" + head.Filename,`
 
 
+# 计算文件的 SHA-1 哈希值
+windows系统:`CertUtil -hashfile <文件路径> SHA1`
+
+例如:`CertUtil -hashfile C:\path\to\example.txt SHA1`
+
+linux系统:`sha1sum <文件路径>`
+
+例如:`sha1sum /path/to/example.txt`
+
+
 
 # 在docker中配置mysql主从数据同步
 

@@ -88,7 +88,12 @@ func GetFileMetaHandler(w http.ResponseWriter, r *http.Request) {
 	// example: sha1sum filename.txt
 
 	filehash := r.Form["filehash"][0]
-	fMeta := meta.GetFileMeta(filehash)
+	//fMeta := meta.GetFileMeta(filehash)
+	fMeta, err := meta.GetFileMetaDB(filehash)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
 	data, err := json.Marshal(fMeta)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)

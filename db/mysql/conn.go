@@ -7,6 +7,7 @@ import (
 	"os"
 )
 
+// 通过sql.DB来管理数据库连接对象
 var db *sql.DB
 
 func init() {
@@ -15,7 +16,9 @@ func init() {
 
 	// 使用全局变量: 保证 db 是全局变量，在 DBConn() 函数中返回的就是正确初始化的 db。
 
-	var err error                                                                            // 声明一个局部变量 err
+	var err error // 声明一个局部变量 err
+
+	//通过sql.Open来创建协程安全的sql.DB对象
 	db, err = sql.Open("mysql", "root:8888.216@tcp(127.0.0.1:3306)/fileserver?charset=utf8") // 不要在这里使用 := 赋值
 	if err != nil {
 		fmt.Println("Failed to open database, err:", err)
