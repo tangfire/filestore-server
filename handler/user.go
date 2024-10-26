@@ -77,9 +77,34 @@ func SignInHandler(w http.ResponseWriter, r *http.Request) {
 
 		// 3.登录成功后重定向到首页
 		//w.Write([]byte("http://" + r.Host + "/static/view/home.html"))
-		http.Redirect(w, r, "/home", http.StatusFound)
-	}
+		//http.Redirect(w, r, "/home", http.StatusFound)
 
+		resp := util.RespMsg{
+			Code: 0,
+			Msg:  "OK",
+			Data: struct {
+				Location string
+				Username string
+				Token    string
+			}{
+				Location: "/home",
+				Username: username,
+				Token:    token,
+			},
+		}
+
+		w.Write(resp.JSONBytes())
+	}
+}
+
+func UserInfoHandler(w http.ResponseWriter, r *http.Request) {
+	// 1.解释请求参数
+
+	// 2.验证token是否有效
+
+	// 3.查询用户信息
+
+	// 4.组装并且响应用户数据
 }
 
 func GenToken(username string) string {
