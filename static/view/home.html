@@ -1,77 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+    <title>文件云盘首页</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
             margin: 0;
+            padding: 0;
+        }
+        #container {
+            display: flex;
+            height: 100vh;
+        }
+        #sidebar {
+            width: 200px;
+            background-color: #f0f0f0;
             padding: 20px;
         }
-        header {
-            background: #007bff;
-            color: #fff;
-            padding: 10px 0;
-            text-align: center;
-        }
-        .container {
-            max-width: 600px;
-            margin: 20px auto;
-            background: #fff;
+        #content {
+            flex: 1;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
-        .user-info {
-            margin-top: 20px;
-        }
-        .error {
-            color: red;
+        h1 {
+            margin: 0 0 20px;
         }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>Welcome to the Home Page</h1>
-</header>
-
-<div class="container">
-    <h2>User Information</h2>
-    <button id="loadUserInfo">Load User Info</button>
-    <div class="user-info" id="userInfo"></div>
+<div id="container">
+    <div id="sidebar">
+        <h2>用户信息</h2>
+        <div id="user-info">
+            <p>用户名: <span id="username"></span></p>
+            <p>注册时间: <span id="signupAt"></span></p>
+        </div>
+    </div>
+    <div id="content">
+        <h1>欢迎来到文件云盘</h1>
+        <!-- 其他内容 -->
+    </div>
 </div>
 
 <script>
-    document.getElementById('loadUserInfo').addEventListener('click', function() {
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', '/user/info', true);
-
-        xhr.onload = function() {
-            if (xhr.status === 200) {
-                const userInfo = JSON.parse(xhr.responseText);
-                document.getElementById('userInfo').innerHTML = `
-                    <p><strong>Username:</strong> ${userInfo.username}</p>
-                    <p><strong>Email:</strong> ${userInfo.email}</p>
-                `;
-            } else {
-                document.getElementById('userInfo').innerHTML = `
-                    <p class="error">Failed to load user info. Status: ${xhr.status}</p>
-                `;
-            }
-        };
-
-        xhr.onerror = function() {
-            document.getElementById('userInfo').innerHTML = `
-                <p class="error">Request error. Please try again later.</p>
-            `;
-        };
-
-        xhr.send();
-    });
+    window.onload = function() {
+        const username = localStorage.getItem('username'); // Get username from local storage
+        const token = localStorage.getItem('token'); // Get token from local storage
+        // console.log("home username = ",username)
+        // console.log("home token",token)
+        fetch(`/user/info?username=${username}&token=${token}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.code === 0) {
+                    // Fill in user information
+                    console.log("home username = ",data.data.Username)
+                    document.getElementById("username").innerText = data.data.Username;
+                    document.getElementById("signupAt").innerText = data.data.SignupAt;
+                } else {
+                    console.error('Error:', data.Msg);
+                }
+            })
+            .catch(error => {
+                console.error('Failed to retrieve user information:', error);
+            });
+    };
 </script>
 
 </body>

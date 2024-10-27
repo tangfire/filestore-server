@@ -64,10 +64,14 @@
 
 <script>
     document.getElementById('loginForm').addEventListener('submit', function(event) {
+
+
         event.preventDefault(); // Prevent the default form submission
 
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
+
+        console.log("bbbbbb");
 
         // Send POST request to /user/signin
         const xhr = new XMLHttpRequest();
@@ -75,12 +79,22 @@
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
         xhr.onload = function() {
+            console.log("hhhhhh");
             if (xhr.status === 200) {
-                if (xhr.responseText === 'FAILED') {
-                    document.getElementById('errorMessage').textContent = 'Invalid username or password.';
+                console.log("Response:", xhr.responseText);
+
+                const response = JSON.parse(xhr.responseText); // 解析JSON响应
+
+                console.log("response.Code = "+response.code)
+
+                if (response.code === 0) {
+                    localStorage.setItem('username', username);
+                    localStorage.setItem('token', response.data.Token); // 保存token
+                    // 使用从后端获取的 Location 进行重定向
+                    console.log("response Data.Location = ",response.data.Location)
+                    window.location.href = response.data.Location;
                 } else {
-                    // Redirect to home page on successful login
-                    window.location.href = '/home';
+                    document.getElementById('errorMessage').textContent = 'Invalid username or password.';
                 }
             } else {
                 document.getElementById('errorMessage').textContent = 'Request error. Please try again.';
@@ -91,10 +105,10 @@
             document.getElementById('errorMessage').textContent = 'Request error. Please try again.';
         };
 
-        // Prepare data for POST request
         const params = `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
         xhr.send(params);
     });
+
 </script>
 
 </body>
